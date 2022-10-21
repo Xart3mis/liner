@@ -602,11 +602,6 @@ func (s *State) Prompt(prompt string) (string, error) {
 // including a trailing newline character. An io.EOF error is returned if the user
 // signals end-of-file by pressing Ctrl-D.
 func (s *State) PromptWithSuggestion(prompt string, text string, pos int) (string, error) {
-	for _, r := range prompt {
-		if unicode.Is(unicode.C, r) {
-			return "", ErrInvalidPrompt
-		}
-	}
 	if s.inputRedirected || !s.terminalSupported {
 		return s.promptUnsupported(prompt)
 	}
